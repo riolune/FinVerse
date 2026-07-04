@@ -43,22 +43,10 @@ FinVerse/
 │── style.css
 │── script.js
 │── README.md
-└── assets/ (optional)
 ```
 
 ---
 
-## 📸 Screenshots
-
-Add screenshots of your application here after uploading them to the repository.
-
-Example:
-
-```
-screenshots/homepage.png
-```
-
----
 
 ## ▶️ How to Run
 
@@ -83,7 +71,7 @@ screenshots/homepage.png
 
 ## 👨‍💻 Author
 
-**STEFFY RIO**
+**STEFFY RIO J**
 
 ---
 
