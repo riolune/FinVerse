@@ -1,3 +1,10 @@
+# 💰 FinVerse
+
+![HTML](https://img.shields.io/badge/HTML-5-orange)
+![CSS](https://img.shields.io/badge/CSS-3-blue)
+![JavaScript](https://img.shields.io/badge/JavaScript-ES6-yellow)
+![Chart.js](https://img.shields.io/badge/Chart.js-4.x-red)
+
 # 💰 FinVerse – Personal Expense Tracker
 
 FinVerse is a modern and interactive Personal Expense Tracker built using **HTML, CSS, and JavaScript**. It helps users manage their monthly income, budget, and daily expenses through an attractive dashboard with real-time updates, interactive charts, and local storage support.
