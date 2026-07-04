@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Personal Expense Tracker</title>
+
+    <!-- Google Font -->
+
+    <link rel="preconnect"
+        href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <!-- Chart JS -->
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- CSS -->
+
+    <link rel="stylesheet"
+        href="style.css">
+
+</head>
+
+<body>
+
+<!--=====================================
+        Animated Background
+======================================-->
+
+<div class="background">
+
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+
+</div>
+
+<!--=====================================
+            NAVBAR
+======================================-->
+
+<nav class="navbar">
+
+    <div class="logo">
+
+        <i class="fa-solid fa-wallet"></i>
+
+        <h2>Expense Tracker</h2>
+
+    </div>
+
+    <div class="nav-right">
+
+        <button
+            id="themeBtn"
+            class="theme-btn">
+
+            <i class="fa-solid fa-moon"></i>
+
+        </button>
+
+        <button
+            id="refreshBtn"
+            class="refresh-btn">
+
+            <i class="fa-solid fa-rotate-right"></i>
+
+        </button>
+
+    </div>
+
+</nav>
+
+<!--=====================================
+            HEADER
+======================================-->
+
+<header>
+
+    <h1>
+
+        Personal Expense Tracker
+
+    </h1>
+
+    <p>
+
+        Track your daily expenses, manage your monthly budget,
+        and visualize your spending with interactive charts.
+
+    </p>
+
+</header>
+
+<!--=====================================
+        DASHBOARD
+======================================-->
+
+<section class="dashboard">
+
+    <!-- Income -->
+
+    <div class="card income-card">
+
+        <div class="icon">
+
+            <i class="fa-solid fa-money-bill-wave"></i>
+
+        </div>
+
+        <div>
+
+            <h3>Total Income</h3>
+
+            <h2 id="incomeDisplay">
+
+                ₹0
+
+            </h2>
+
+        </div>
+
+    </div>
+
+    <!-- Expense -->
+
+    <div class="card expense-card">
+
+        <div class="icon">
+
+            <i class="fa-solid fa-credit-card"></i>
+
+        </div>
+
+        <div>
+
+            <h3>Total Expense</h3>
+
+            <h2 id="expenseDisplay">
+
+                ₹0
+
+            </h2>
+
+        </div>
+
+    </div>
+
+    <!-- Balance -->
+
+    <div class="card balance-card">
+
+        <div class="icon">
+
+            <i class="fa-solid fa-piggy-bank"></i>
+
+        </div>
+
+        <div>
+
+            <h3>Remaining Balance</h3>
+
+            <h2 id="balanceDisplay">
+
+                ₹0
+
+            </h2>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!--=====================================
+        MONTHLY BUDGET
+======================================-->
+
+<section>
+
+    <div class="budget-box">
+
+        <div class="budget-header">
+
+            <h2>
+
+                <i class="fa-solid fa-chart-line"></i>
+
+                Monthly Budget
+
+            </h2>
+
+            <span id="budgetPercent">
+
+                0%
+
+            </span>
+
+        </div>
+
+        <div class="progress-bar">
+
+            <div id="progressFill"></div>
+
+        </div>
+
+        <div class="budget-info">
+
+            <p>
+
+                Budget :
+                <strong id="budgetValue">
+
+                    ₹0
+
+                </strong>
+
+            </p>
+
+            <p>
+
+                Spent :
+                <strong id="spentValue">
+
+                    ₹0
+
+                </strong>
+
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!--=====================================
+    Income & Budget Settings
+======================================-->
+
+<section class="settings-section">
+
+    <div class="settings-box">
+
+        <h2>
+
+            <i class="fa-solid fa-gear"></i>
+
+            Income & Budget Settings
+
+        </h2>
+
+        <p class="settings-note">
+
+            Set your monthly income and budget once.
+            You can edit them anytime using the
+            <strong>Edit Settings</strong> button.
+
+        </p>
+
+        <div class="settings-grid">
+
+            <!-- Monthly Income -->
+
+            <div class="input-group">
+
+                <label>
+
+                    Monthly Income
+
+                </label>
+
+                <input
+                    type="number"
+                    id="income"
+                    placeholder="Enter Monthly Income">
+
+            </div>
+
+            <!-- Monthly Budget -->
+
+            <div class="input-group">
+
+                <label>
+
+                    Monthly Budget
+
+                </label>
+
+                <input
+                    type="number"
+                    id="budget"
+                    placeholder="Enter Monthly Budget">
+
+            </div>
+
+        </div>
+
+        <div class="button-group">
+
+            <button
+                id="saveSettings">
+
+                <i class="fa-solid fa-floppy-disk"></i>
+
+                Save Settings
+
+            </button>
+
+            <button
+                id="editSettings">
+
+                <i class="fa-solid fa-pen"></i>
+
+                Edit Settings
+
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ========= Part 1A Ends Here ========= -->
+  <!--=====================================
+        ADD EXPENSE FORM
+======================================-->
+
+<section class="form-section">
+
+    <div class="form-container">
+
+        <h2>
+
+            <i class="fa-solid fa-circle-plus"></i>
+
+            Add New Expense
+
+        </h2>
+
+        <form id="expenseForm">
+
+            <!-- Expense Title -->
+
+            <div class="input-group">
+
+                <label>
+
+                    Expense Title
+
+                </label>
+
+                <input
+                    type="text"
+                    id="title"
+                    placeholder="Example : Grocery Shopping"
+                    required>
+
+            </div>
+
+            <!-- Amount -->
+
+            <div class="input-group">
+
+                <label>
+
+                    Amount (₹)
+
+                </label>
+
+                <input
+                    type="number"
+                    id="amount"
+                    placeholder="Enter Amount"
+                    min="1"
+                    required>
+
+            </div>
+
+            <!-- Category -->
+
+            <div class="input-group">
+
+                <label>
+
+                    Category
+
+                </label>
+
+                <select id="category">
+
+                    <option value="Food">🍔 Food</option>
+
+                    <option value="Shopping">🛍 Shopping</option>
+
+                    <option value="Transport">🚗 Transport</option>
+
+                    <option value="Bills">💡 Bills</option>
+
+                    <option value="Education">📚 Education</option>
+
+                    <option value="Health">🏥 Health</option>
+
+                    <option value="Entertainment">🎬 Entertainment</option>
+
+                    <option value="Travel">✈ Travel</option>
+
+                    <option value="Others">📦 Others</option>
+
+                </select>
+
+            </div>
+
+            <!-- Date -->
+
+            <div class="input-group">
+
+                <label>
+
+                    Date
+
+                </label>
+
+                <input
+                    type="date"
+                    id="date"
+                    required>
+
+            </div>
+
+            <!-- Buttons -->
+
+            <div class="button-group">
+
+                <button
+                    type="submit"
+                    id="addBtn">
+
+                    <i class="fa-solid fa-plus"></i>
+
+                    Add Expense
+
+                </button>
+
+                <button
+                    type="reset"
+                    id="clearBtn">
+
+                    <i class="fa-solid fa-broom"></i>
+
+                    Clear Form
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</section>
+
+<!--=====================================
+        SEARCH & FILTER
+======================================-->
+
+<section class="filter-section">
+
+    <div class="filter-box">
+
+        <!-- Search -->
+
+        <input
+            type="text"
+            id="searchExpense"
+            placeholder="🔍 Search by Expense Title...">
+
+        <!-- Filter -->
+
+        <select id="filterCategory">
+
+            <option value="All">
+
+                All Categories
+
+            </option>
+
+            <option value="Food">
+
+                🍔 Food
+
+            </option>
+
+            <option value="Shopping">
+
+                🛍 Shopping
+
+            </option>
+
+            <option value="Transport">
+
+                🚗 Transport
+
+            </option>
+
+            <option value="Bills">
+
+                💡 Bills
+
+            </option>
+
+            <option value="Education">
+
+                📚 Education
+
+            </option>
+
+            <option value="Health">
+
+                🏥 Health
+
+            </option>
+
+            <option value="Entertainment">
+
+                🎬 Entertainment
+
+            </option>
+
+            <option value="Travel">
+
+                ✈ Travel
+
+            </option>
+
+            <option value="Others">
+
+                📦 Others
+
+            </option>
+
+        </select>
+
+        <!-- Sort -->
+
+        <button id="sortBtn">
+
+            <i class="fa-solid fa-arrow-up-wide-short"></i>
+
+            Sort Amount
+
+        </button>
+
+    </div>
+
+</section>
+
+<!-- ========= Part 1B Ends Here ========= -->
+  <!--=====================================
+        EXPENSE HISTORY
+======================================-->
+
+<section class="table-section">
+
+    <div class="table-container">
+
+        <h2>
+
+            <i class="fa-solid fa-list"></i>
+
+            Expense History
+
+        </h2>
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>Title</th>
+
+                    <th>Category</th>
+
+                    <th>Amount</th>
+
+                    <th>Date</th>
+
+                    <th>Action</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody id="expenseTable">
+
+                <tr>
+
+                    <td colspan="5">
+
+                        No Expenses Added Yet
+
+                    </td>
+
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</section>
+
+<!--=====================================
+        STATISTICS
+======================================-->
+
+<section class="statistics">
+
+    <div class="stat-card">
+
+        <i class="fa-solid fa-wallet"></i>
+
+        <h3>Total Expenses</h3>
+
+        <h2 id="totalExpenseCount">
+
+            0
+
+        </h2>
+
+    </div>
+
+    <div class="stat-card">
+
+        <i class="fa-solid fa-calendar-days"></i>
+
+        <h3>This Month</h3>
+
+        <h2 id="monthExpense">
+
+            ₹0
+
+        </h2>
+
+    </div>
+
+    <div class="stat-card">
+
+        <i class="fa-solid fa-arrow-trend-up"></i>
+
+        <h3>Highest Expense</h3>
+
+        <h2 id="highestExpense">
+
+            ₹0
+
+        </h2>
+
+    </div>
+
+</section>
+
+<!--=====================================
+        EXPENSE CHART
+======================================-->
+
+<section class="chart-section">
+
+    <h2>
+
+        <i class="fa-solid fa-chart-pie"></i>
+
+        Expense Analysis
+
+    </h2>
+
+    <canvas id="expenseChart"></canvas>
+
+</section>
+
+<!--=====================================
+        DELETE MODAL
+======================================-->
+
+<div class="modal"
+
+     id="deleteModal">
+
+    <div class="modal-content">
+
+        <i class="fa-solid fa-triangle-exclamation"></i>
+
+        <h2>
+
+            Delete Expense?
+
+        </h2>
+
+        <p>
+
+            This action cannot be undone.
+
+        </p>
+
+        <div class="modal-buttons">
+
+            <button id="confirmDelete">
+
+                <i class="fa-solid fa-trash"></i>
+
+                Delete
+
+            </button>
+
+            <button id="cancelDelete">
+
+                <i class="fa-solid fa-xmark"></i>
+
+                Cancel
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!--=====================================
+        TOAST MESSAGE
+======================================-->
+
+<div id="toast">
+
+</div>
+
+<!--=====================================
+        FLOATING BUTTON
+======================================-->
+
+<button id="floatingBtn">
+
+    <i class="fa-solid fa-plus"></i>
+
+</button>
+
+<!--=====================================
+        FOOTER
+======================================-->
+
+<footer>
+
+    <h3>Personal Expense Tracker</h3>
+
+    <p>
+        Manage your money smarter, track every expense, and stay within your monthly budget.
+    </p>
+
+    <div class="footer-icons">
+
+        <i class="fa-solid fa-wallet"></i>
+
+        <i class="fa-solid fa-chart-pie"></i>
+
+        <i class="fa-solid fa-piggy-bank"></i>
+
+    </div>
+
+    <p>
+
+        © 2025 | Designed for Mini Project
+
+    </p>
+
+</footer>
+
+<!--=====================================
+        JAVASCRIPT
+======================================-->
+
+<script src="script.js"></script>
+
+</body>
+
+</html>
